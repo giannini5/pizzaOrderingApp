@@ -31,6 +31,9 @@ public class TestHelper {
     public static ToppingOrm toppingOrm;
 
     public static void primeDatabase() throws Exception {
+        // Drop all objects and create new ones
+        Database.getInstance().dropAllObjects();
+
         // Create enum tables
         dollarsOff = new EnumPromotionTypeOrm(EnumPromotionTypeOrm.DOLLARS_OFF, true);
         percentOff = new EnumPromotionTypeOrm(EnumPromotionTypeOrm.PERCENT_OFF, false);
