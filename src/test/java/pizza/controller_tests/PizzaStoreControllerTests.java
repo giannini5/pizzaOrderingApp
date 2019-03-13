@@ -76,9 +76,11 @@ public class PizzaStoreControllerTests {
         MvcResult result = mockMvc.perform(requestBuilder).andReturn();
 
         System.out.println(result.getResponse());
-        String expected = "{\"name\":\"Daves Pizza\",\"id\":1,\"address\":\"2910 Paseo del Refugio\"}";
 
-        assertEquals(expected, result.getResponse().getContentAsString());
+        JSONObject jsonObject = new JSONObject(result.getResponse().getContentAsString());
+        assertEquals(1, jsonObject.getLong("id"));
+        assertEquals("Daves Pizza", jsonObject.getString("name"));
+        assertEquals("2910 Paseo del Refugio", jsonObject.getString("address"));
     }
 
 }
