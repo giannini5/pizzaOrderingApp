@@ -20,6 +20,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+import org.json.JSONObject;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -62,7 +63,10 @@ public class PizzaStoreControllerTests {
         System.out.println(result.getResponse());
         String expected = "{\"name\":\"Dominos\",\"id\":2,\"address\":\"2910\"}";
 
-        assertEquals(expected, result.getResponse().getContentAsString());
+        JSONObject jsonObject = new JSONObject(result.getResponse().getContentAsString());
+        assertEquals(2, jsonObject.getLong("id"));
+        assertEquals("Dominos", jsonObject.getString("name"));
+        assertEquals("2910", jsonObject.getString("address"));
     }
 
     @Test
